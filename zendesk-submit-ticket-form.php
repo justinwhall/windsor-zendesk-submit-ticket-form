@@ -1,11 +1,11 @@
 <?php
 /*
 	Plugin Name: Zendesk Submit Ticket Form
-	Plugin URI: https://windsorup.com/wordpress-zendesk-submit-ticket-form/
+	Plugin URI: http://justinwhall.com
 	Description: A simple plugin that generates a form for your users to submit a ticket to your Zendesk Account.
 	Tags: contact, form, contact form, email, mail, captcha, zendesk
 	Author: Justin W. Hall
-	Author URI: http://monzilla.biz/
+	Author URI: http://justinwhall.com
 	Donate link:
 	Contributors: Jeff Starr. Forked from https://wordpress.org/plugins/simple-basic-contact-form/
 	Requires at least: 4.1
@@ -281,15 +281,15 @@ __('Agent: ', 'zdf') . $agent     . "\n\n";
 
 	$fullmsg = apply_filters('zdf_full_message', $fullmsg);
 
-	// build ticket	
+	// build ticket
 	$ticket = array(
 		'ticket' => array(
-			'subject' => $_POST['zdf_subject'], 
+			'subject' => $_POST['zdf_subject'],
 			'comment' => array(
-				'value'=>$_POST['zdf_message'] 
+				'value'=>$_POST['zdf_message']
 				),
 		    'requester' => array(
-		    	'name' => $_POST['zdf_name'], 
+		    	'name' => $_POST['zdf_name'],
 		    	'email' => $_POST['zdf_email']
 		    	)
 		    )
