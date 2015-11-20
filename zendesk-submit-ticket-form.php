@@ -24,7 +24,7 @@ $zdf_version = '20151111';
 $zdf_plugin  = __('Zendesk Submit Ticket Form', 'zdf');
 $zdf_options = get_option('zdf_options');
 $zdf_path    = plugin_basename(__FILE__); // 'simple-basic-contact-form/simple-basic-contact-form.php';
-$zdf_homeurl = 'https://perishablepress.com/simple-basic-contact-form/';
+$zdf_homeurl = 'https://justinwhall.com';
 
 // date_default_timezone_set('UTC');
 
@@ -903,8 +903,10 @@ function zdf_render_form() {
 			</div>
 			<div id="mm-credit-info">
 				<a target="_blank" href="<?php echo $zdf_homeurl; ?>" title="<?php echo $zdf_plugin; ?> Homepage"><?php echo $zdf_plugin; ?></a> <?php _e('by', 'zdf'); ?>
-				<a target="_blank" href="https://twitter.com/perishable" title="Jeff Starr on Twitter">Jeff Starr</a> @
-				<a target="_blank" href="http://monzilla.biz/" title="Obsessive Web Design &amp; Development">Monzilla Media</a>
+				<a target="_blank" href="https://twitter.com/justinwhall" title="Justin Hall on Twitter">Justin W Hall</a> @
+				<a target="_blank" href="http://windsorup.com" title="WordPress Maintenance &amp; Development">Windsor Digital</a>
+				&amp;
+				<a target="_blank" href="http://justinwhall.com" title="WordPress Design &amp; Development">Justin W. Hall</a>				
 			</div>
 		</form>
 	</div>
