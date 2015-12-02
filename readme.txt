@@ -1,4 +1,4 @@
-=== Simple Basic Contact Form ===
+=== Windsor Zendesk Submit Ticket Form ===
 
 Plugin Name: Windsor Zendesk Submit Ticket Form
 Plugin URI: http://windsorup.com/zendesk-submit-ticket-form-wordpress-plugin/
