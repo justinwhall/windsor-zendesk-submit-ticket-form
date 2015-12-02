@@ -1,9 +1,9 @@
 <?php
 /*
-	Plugin Name: Zendesk Submit Ticket Form
-	Plugin URI: http://justinwhall.com
+	Plugin Name: Windsor Zendesk Submit Ticket Form
+	Plugin URI: http://windsorup.com/zendesk-submit-ticket-form-wordpress-plugin/
 	Description: A simple plugin that generates a form for your users to submit a ticket to your Zendesk Account.
-	Tags: contact, form, contact form, email, mail, captcha, zendesk
+	Tags: support, form, contact form, email, mail, captcha, zendesk
 	Author: Justin W. Hall
 	Author URI: http://justinwhall.com
 	Donate link:
@@ -21,9 +21,9 @@ if (!function_exists('add_action')) die();
 
 $zdf_wp_vers = '1.1';
 $zdf_version = '20151111';
-$zdf_plugin  = __('Zendesk Submit Ticket Form', 'zdf');
+$zdf_plugin  = __('Windsor Zendesk Submit Ticket Form', 'zdf');
 $zdf_options = get_option('zdf_options');
-$zdf_path    = plugin_basename(__FILE__); // 'simple-basic-contact-form/simple-basic-contact-form.php';
+$zdf_path    = plugin_basename(__FILE__);
 $zdf_homeurl = 'https://justinwhall.com';
 
 // date_default_timezone_set('UTC');
@@ -196,7 +196,7 @@ function zdf_input_filter() {
 
 
 // shortcode to display contact form
-add_shortcode('zendesk_ticket_form','zdf_shortcode');
+add_shortcode('windsor_zendesk_ticket_form','zdf_shortcode');
 function zdf_shortcode() {
 	if (zdf_input_filter()) {
 		return zdf_process_contact_form();
@@ -206,7 +206,7 @@ function zdf_shortcode() {
 }
 
 // template tag to display contact form
-function zendesk_ticket_form() {
+function windsor_zendesk_ticket_form() {
 	if (zdf_input_filter()) {
 		echo zdf_process_contact_form();
 	} else {
@@ -233,7 +233,6 @@ function zdf_process_contact_form($content = '') {
 	$recipname = $zdf_options['zdf_name'];
 	$recipsite = $zdf_options['zdf_website'];
 	$success   = $zdf_options['zdf_success'];
-	$carbon    = $zdf_options['zdf_carbon'];
 	$offset    = $zdf_options['zdf_offset'];
 	$prepend   = $zdf_options['zdf_prepend'];
 	$append    = $zdf_options['zdf_append'];
@@ -284,7 +283,7 @@ __('Agent: ', 'zdf') . $agent     . "\n\n";
 	// build ticket
 	$ticket = array(
 		'ticket' => array(
-			'subject' => $_POST['zdf_subject'],
+			'subject' => $subject,
 			'comment' => array(
 				'value'=>$_POST['zdf_message']
 				),
@@ -387,7 +386,7 @@ function zdf_display_contact_form() {
 	} else { $captcha_box = ''; }
 
 	$zdf_form = ($zdf_preform . $zdf_strings['error'] . '
-		<div id="simple-contact-form" class="zdf">
+		<div id="zendesk-contact-form" class="zdf">
 			<form action="" method="post">
 				<fieldset class="zdf-name">
 					<label for="zdf_name">'. $nametext .'</label>
@@ -462,15 +461,15 @@ function zdf_add_defaults() {
 			'zdf_website'         => $site_title,
 			'zdf_email'           => $admin_mail,
 			'zdf_offset'          => '0',
-			'zdf_subject'         => __('Message sent from your contact form.', 'zdf'),
+			'zdf_subject'         => __('Support Request', 'zdf'),
 			'zdf_question'        => __('1 + 1 =', 'zdf'),
 			'zdf_response'        => __('2', 'zdf'),
 			'zdf_casing'          => 0,
 			'zdf_nametext'        => __('Name (Required)', 'zdf'),
 			'zdf_mailtext'        => __('Email (Required)', 'zdf'),
 			'zdf_subjtext'        => __('Subject (Required)', 'zdf'),
-			'zdf_messtext'        => __('Message (Required)', 'zdf'),
-			'zdf_success'         => '<p class=\'zdf_success\'><strong>' . __('Success!', 'zdf') . '</strong> ' . __('Your message has been sent.', 'zdf') . '</p>',
+			'zdf_messtext'        => __('Support Request (Required)', 'zdf'),
+			'zdf_success'         => '<p class=\'zdf_success\'><strong>' . __('Success!', 'zdf') . '</strong> ' . __('Your support ticket has been submitted.', 'zdf') . '</p>',
 			'zdf_error'           => '<p class=\'zdf_error\'>' . __('Please complete the required fields.', 'zdf') . '</p>',
 			'zdf_spam'            => '<p class=\'zdf_spam\'>' . __('Incorrect response for challenge question. Please try again.', 'zdf') . '</p>',
 			'zdf_style'           => 'style=\'border: 1px solid #CC0000;\'',
@@ -480,16 +479,15 @@ function zdf_add_defaults() {
 			'zdf_url'           => '',
 			'zdf_url'           => '',
 			'zdf_append'          => '',
-			'zdf_css'             => '#simple-contact-form fieldset { width: 100%; overflow: hidden; margin: 5px 0; border: 0; } #simple-contact-form fieldset input { float: left; width: 60%; } #simple-contact-form textarea { float: left; clear: both; width: 95%; } #simple-contact-form label { float: left; clear: both; width: 30%; margin-top: 3px; line-height: 1.8; font-size: 90%; }',
+			'zdf_css'             => '#zendesk-contact-form fieldset { width: 100%; overflow: hidden; margin: 5px 0; border: 0; } #zendesk-contact-form fieldset input { float: left; width: 60%; } #zendesk-contact-form textarea { float: left; clear: both; width: 95%; } #zendesk-contact-form label { float: left; clear: both; width: 30%; margin-top: 3px; line-height: 1.8; font-size: 90%; }',
 			'zdf_preform'         => '',
 			'zdf_appform'         => '<div style=\'clear:both;\'>&nbsp;</div>',
 			'zdf_captcha'         => 1,
-			'zdf_carbon'          => 1,
 			'zdf_input_name'      => __('Your Name', 'zdf'),
 			'zdf_input_email'     => __('Your Email', 'zdf'),
 			'zdf_input_subject'   => __('Email Subject', 'zdf'),
 			'zdf_input_captcha'   => __('Correct Response', 'zdf'),
-			'zdf_input_message'   => __('Your Message', 'zdf'),
+			'zdf_input_message'   => __('Your Support Request', 'zdf'),
 			'zdf_mail_function'   => 1,
 			'zdf_success_details' => 1,
 		);
@@ -562,9 +560,6 @@ function zdf_validate_options($input) {
 	if (!isset($input['zdf_captcha'])) $input['zdf_captcha'] = null;
 	$input['zdf_captcha'] = ($input['zdf_captcha'] == 1 ? 1 : 0);
 
-	if (!isset($input['zdf_carbon'])) $input['zdf_carbon'] = null;
-	$input['zdf_carbon'] = ($input['zdf_carbon'] == 1 ? 1 : 0);
-
 	$input['zdf_input_name'] = wp_filter_nohtml_kses($input['zdf_input_name']);
 	$input['zdf_input_email'] = wp_filter_nohtml_kses($input['zdf_input_email']);
 	$input['zdf_input_subject'] = wp_filter_nohtml_kses($input['zdf_input_subject']);
@@ -634,17 +629,16 @@ function zdf_render_form() {
 						<div class="toggle">
 							<div class="mm-panel-overview">
 								<p>
-									<strong><?php echo $zdf_plugin; ?></strong> <?php _e('(SBCF) is a simple basic contact form for your WordPress-powered website. Automatically sends a carbon copy to the sender.', 'zdf'); ?>
-									<?php _e('Simply choose your options, then add the shortcode to any post or page to display the contact form. For a contact form with more options try ', 'zdf'); ?>
-									<a href="https://perishablepress.com/contact-coldform/">Contact Coldform</a>.
+									<strong><?php echo $zdf_plugin; ?></strong> <?php _e('Zendesk Contact Form is creates a support request form on your website.', 'zdf'); ?>
+									<?php _e('Simply choose your options, then add the shortcode to any post or page to display the form.', 'zdf'); ?>
 								</p>
 								<ul>
-									<li><?php _e('To configure the contact form, visit the', 'zdf'); ?> <a id="mm-panel-primary-link" href="#mm-panel-primary"><?php _e('Options panel', 'zdf'); ?></a>.</li>
+									<li><?php _e('To configure the support form, visit the', 'zdf'); ?> <a id="mm-panel-primary-link" href="#mm-panel-primary"><?php _e('Options panel', 'zdf'); ?></a>.</li>
 									<li><?php _e('For the shortcode and template tag, visit', 'zdf'); ?> <a id="mm-panel-secondary-link" href="#mm-panel-secondary"><?php _e('Shortcodes &amp; Template Tags', 'zdf'); ?></a>.</li>
 									<li><?php _e('To restore default settings, visit', 'zdf'); ?> <a id="mm-restore-settings-link" href="#mm-restore-settings"><?php _e('Restore Default Options', 'zdf'); ?></a>.</li>
 									<li>
-										<?php _e('For more information check the', 'zdf'); ?> <a target="_blank" href="<?php echo plugins_url('/simple-basic-contact-form/readme.txt', dirname(__FILE__)); ?>">readme.txt</a>
-										<?php _e('and', 'zdf'); ?> <a target="_blank" href="<?php echo $zdf_homeurl; ?>"><?php _e('SBCF Homepage', 'zdf'); ?></a>.
+										<?php _e('For more information check the', 'zdf'); ?> <a target="_blank" href="<?php echo plugins_url('/zendesk-support-form/readme.txt', dirname(__FILE__)); ?>">readme.txt</a>
+										<?php _e('and', 'zdf'); ?> <a target="_blank" href="<?php echo $zdf_homeurl; ?>"><?php _e('ZDSF Homepage', 'zdf'); ?></a>.
 									</li>
 									<li><?php _e('If you like this plugin, please', 'zdf'); ?>
 										<a target="_blank" href="http://wordpress.org/support/view/plugin-reviews/<?php echo basename(dirname(__FILE__)); ?>?rate=5#postform" title="<?php _e('Click here to rate and review this plugin on WordPress.org', 'zdf'); ?>">
@@ -658,24 +652,24 @@ function zdf_render_form() {
 					<div id="mm-panel-primary" class="postbox">
 						<h2><?php _e('Options', 'zdf'); ?></h2>
 						<div class="toggle<?php if (!isset($_GET["settings-updated"])) { echo ' default-hidden'; } ?>">
-							<p><?php _e('Configure the contact form..', 'zdf'); ?></p>
+							<p><?php _e('Configure the support form..', 'zdf'); ?></p>
 							<h3><?php _e('General options', 'zdf'); ?></h3>
 							<div class="mm-table-wrap">
 								<table class="widefat mm-table">
 									<tr>
 										<th scope="row"><label class="description" for="zdf_options[zdf_name]"><?php _e('Your Name', 'zdf'); ?></label></th>
 										<td><input type="text" size="50" maxlength="200" name="zdf_options[zdf_name]" value="<?php echo $zdf_options['zdf_name']; ?>" />
-										<div class="mm-item-caption"><?php _e('How would you like to be addressed in messages sent from the contact form?', 'zdf'); ?></div></td>
+										<div class="mm-item-caption"><?php _e('How would you like to be addressed in messages sent from the support form?', 'zdf'); ?></div></td>
 									</tr>
 									<tr>
 										<th scope="row"><label class="description" for="zdf_options[zdf_email]"><?php _e('Your Email', 'zdf'); ?></label></th>
 										<td><input type="text" size="50" maxlength="200" name="zdf_options[zdf_email]" value="<?php echo $zdf_options['zdf_email']; ?>" />
-										<div class="mm-item-caption"><?php _e('Where would you like to receive messages sent from the contact form?', 'zdf'); ?></div></td>
+										<div class="mm-item-caption"><?php _e('Where would you like to receive messages sent from the support form?', 'zdf'); ?></div></td>
 									</tr>
 									<tr>
 										<th scope="row"><label class="description" for="zdf_options[zdf_website]"><?php _e('Your Site', 'zdf'); ?></label></th>
 										<td><input type="text" size="50" maxlength="200" name="zdf_options[zdf_website]" value="<?php echo $zdf_options['zdf_website']; ?>" />
-										<div class="mm-item-caption"><?php _e('From where should the contact messages indicate they were sent?', 'zdf'); ?></div></td>
+										<div class="mm-item-caption"><?php _e('From where should the support messages indicate they were sent?', 'zdf'); ?></div></td>
 									</tr>
 									<tr>
 										<th scope="row"><label class="description" for="zdf_options[zdf_subject]"><?php _e('Default Subject', 'zdf'); ?></label></th>
@@ -713,11 +707,6 @@ function zdf_render_form() {
 										</td>
 									</tr>
 									<tr>
-										<th scope="row"><label class="description" for="zdf_options[zdf_carbon]"><?php _e('Enable Carbon Copies?', 'zdf'); ?></label></th>
-										<td><input type="checkbox" name="zdf_options[zdf_carbon]" value="1" <?php if (isset($zdf_options['zdf_carbon'])) { checked('1', $zdf_options['zdf_carbon']); } ?> />
-										<?php _e('Check this box if you want to enable the automatic sending of carbon-copies to the sender.', 'zdf'); ?></td>
-									</tr>
-									<tr>
 										<th scope="row"><label class="description" for="zdf_options[zdf_mail_function]"><?php _e('Mail Function', 'zdf'); ?></label></th>
 										<td><input type="checkbox" name="zdf_options[zdf_mail_function]" value="1" <?php if (isset($zdf_options['zdf_mail_function'])) { checked('1', $zdf_options['zdf_mail_function']); } ?> />
 										<?php _e('Check this box if you want to use PHP&rsquo;s mail() function instead of WP&rsquo;s wp_mail() (default).', 'zdf'); ?></td>
@@ -735,7 +724,7 @@ function zdf_render_form() {
 									<tr>
 										<th scope="row"><label class="description" for="zdf_options[zdf_css]"><?php _e('Custom CSS styles', 'zdf'); ?></label></th>
 										<td><textarea class="textarea" rows="7" cols="55" name="zdf_options[zdf_css]"><?php echo esc_textarea($zdf_options['zdf_css']); ?></textarea>
-										<div class="mm-item-caption"><?php _e('Add some CSS to style the contact form. Note: do not include the <code>&lt;style&gt;</code> tags.<br />
+										<div class="mm-item-caption"><?php _e('Add some CSS to style the support form. Note: do not include the <code>&lt;style&gt;</code> tags.<br />
 											Note: visit <a href="http://m0n.co/i" target="_blank">m0n.co/i</a> for complete list of CSS hooks.', 'zdf'); ?></div></td>
 									</tr>
 								</table>
@@ -817,12 +806,12 @@ function zdf_render_form() {
 									<tr>
 										<th scope="row"><label class="description" for="zdf_options[zdf_preform]"><?php _e('Custom content before the form', 'zdf'); ?></label></th>
 										<td><textarea class="textarea" rows="3" cols="55" name="zdf_options[zdf_preform]"><?php echo esc_textarea($zdf_options['zdf_preform']); ?></textarea>
-										<div class="mm-item-caption"><?php _e('Add some text/markup to appear <em>before</em> the submitted contact form (optional).', 'zdf'); ?></div></td>
+										<div class="mm-item-caption"><?php _e('Add some text/markup to appear <em>before</em> the submitted support form (optional).', 'zdf'); ?></div></td>
 									</tr>
 									<tr>
 										<th scope="row"><label class="description" for="zdf_options[zdf_appform]"><?php _e('Custom content after the form', 'zdf'); ?></label></th>
 										<td><textarea class="textarea" rows="3" cols="55" name="zdf_options[zdf_appform]"><?php echo esc_textarea($zdf_options['zdf_appform']); ?></textarea>
-										<div class="mm-item-caption"><?php _e('Add some text/markup to appear <em>after</em> the submitted contact form (optional).', 'zdf'); ?></div></td>
+										<div class="mm-item-caption"><?php _e('Add some text/markup to appear <em>after</em> the submitted support form (optional).', 'zdf'); ?></div></td>
 									</tr>
 									<tr>
 										<th scope="row"><label class="description" for="zdf_options[zdf_prepend]"><?php _e('Custom content before results', 'zdf'); ?></label></th>
@@ -843,11 +832,38 @@ function zdf_render_form() {
 						<h2><?php _e('Shortcodes &amp; Template Tags', 'zdf'); ?></h2>
 						<div class="toggle<?php if (!isset($_GET["settings-updated"])) { echo ' default-hidden'; } ?>">
 							<h3><?php _e('Shortcode', 'zdf'); ?></h3>
-							<p><?php _e('Use this shortcode to display the contact form on a post or page:', 'zdf'); ?></p>
+							<p><?php _e('Use this shortcode to display the support form on a post or page:', 'zdf'); ?></p>
 							<p><code class="mm-code">[zendesk_ticket_form]</code></p>
 							<h3><?php _e('Template tag', 'zdf'); ?></h3>
 							<p><?php _e('Use this template tag to display the form anywhere in your theme template:', 'zdf'); ?></p>
 							<p><code class="mm-code">&lt;?php if (function_exists('zendesk_ticket_form')) zendesk_ticket_form(); ?&gt;</code></p>
+						</div>
+					</div>
+
+
+					<div id="mm-zd-creds" class="postbox">
+						<h2><?php _e('ZendDesk Credentials', 'zdf'); ?></h2>
+						<div class="toggle default-hidden">
+							<div class="mm-table-wrap">
+								<table class="widefat mm-table">
+									<tr>
+										<th scope="row"><label class="description" for="zdf_options[zdf_apikey]"><?php _e('Zendesk API Key', 'zdf'); ?></label></th>
+										<td><input type="text" size="50" maxlength="200" name="zdf_options[zdf_apikey]" value="<?php echo $zdf_options['zdf_apikey']; ?>" />
+										<div class="mm-item-caption"><?php _e('Your API Key can be found/created by logging into your ZendDesk account and: Settings &gt; Channels &gt; API', 'zdf'); ?></div></td>
+									</tr>
+									<tr>
+										<th scope="row"><label class="description" for="zdf_options[zdf_user]"><?php _e('Zendesk User', 'zdf'); ?></label></th>
+										<td><input type="text" size="50" maxlength="200" name="zdf_options[zdf_user]" value="<?php echo $zdf_options['zdf_user']; ?>" />
+										<div class="mm-item-caption"><?php _e('This is the email you used to sign up with.', 'zdf'); ?></div></td>
+									</tr>
+									<tr>
+										<th scope="row"><label class="description" for="zdf_options[zdf_url]"><?php _e('Zendesk URL', 'zdf'); ?></label></th>
+										<td><input type="text" size="50" maxlength="200" name="zdf_options[zdf_url]" value="<?php echo $zdf_options['zdf_url']; ?>" />
+										<div class="mm-item-caption"><?php _e('The Zendesk URL where users can submit support tickets.', 'zdf'); ?></div></td>
+									</tr>
+								</table>
+							</div>
+							<input type="submit" class="button-primary" value="<?php _e('Save Settings', 'zdf'); ?>" />
 						</div>
 					</div>
 
@@ -866,47 +882,13 @@ function zdf_render_form() {
 							<input type="submit" class="button-primary" value="<?php _e('Save Settings', 'zdf'); ?>" />
 						</div>
 					</div>
-					<div id="zd-creds" class="postbox">
-						<h2><?php _e('ZendDesk Credentials', 'zdf'); ?></h2>
-						<div class="toggle">
-							<div class="mm-table-wrap">
-								<table class="widefat mm-table">
-									<tr>
-										<th scope="row"><label class="description" for="zdf_options[zdf_apikey]"><?php _e('Zendesk API Key', 'zdf'); ?></label></th>
-										<td><input type="text" size="50" maxlength="200" name="zdf_options[zdf_apikey]" value="<?php echo $zdf_options['zdf_apikey']; ?>" />
-										<div class="mm-item-caption"><?php _e('Your API Key can be found <a href="#">Here</a>.', 'zdf'); ?></div></td>
-									</tr>
-									<tr>
-										<th scope="row"><label class="description" for="zdf_options[zdf_user]"><?php _e('Zendesk User', 'zdf'); ?></label></th>
-										<td><input type="text" size="50" maxlength="200" name="zdf_options[zdf_user]" value="<?php echo $zdf_options['zdf_user']; ?>" />
-										<div class="mm-item-caption"><?php _e('This is the email you used to sign up with.', 'zdf'); ?></div></td>
-									</tr>
-									<tr>
-										<th scope="row"><label class="description" for="zdf_options[zdf_url]"><?php _e('Zendesk URL', 'zdf'); ?></label></th>
-										<td><input type="text" size="50" maxlength="200" name="zdf_options[zdf_url]" value="<?php echo $zdf_options['zdf_url']; ?>" />
-										<div class="mm-item-caption"><?php _e('The Zendesk URL where users can submit support tickets.', 'zdf'); ?></div></td>
-									</tr>
-								</table>
-							</div>
-							<input type="submit" class="button-primary" value="<?php _e('Save Settings', 'zdf'); ?>" />
-						</div>
-					</div>
-					<div id="mm-panel-current" class="postbox">
-						<h2><?php _e('Updates &amp; Info', 'zdf'); ?></h2>
-						<div class="toggle">
-							<div id="mm-iframe-wrap">
-								<!-- <iframe src="https://perishablepress.com/current/index-zdf.html"></iframe> -->
-							</div>
-						</div>
-					</div>
 				</div>
 			</div>
 			<div id="mm-credit-info">
 				<a target="_blank" href="<?php echo $zdf_homeurl; ?>" title="<?php echo $zdf_plugin; ?> Homepage"><?php echo $zdf_plugin; ?></a> <?php _e('by', 'zdf'); ?>
-				<a target="_blank" href="https://twitter.com/justinwhall" title="Justin Hall on Twitter">Justin W Hall</a> @
-				<a target="_blank" href="http://windsorup.com" title="WordPress Maintenance &amp; Development">Windsor Digital</a>
-				&amp;
-				<a target="_blank" href="http://justinwhall.com" title="WordPress Design &amp; Development">Justin W. Hall</a>				
+				<a target="_blank" href="http://justinwhall.com" title="Justin Hall on Twitter">Justin W Hall</a> @
+				<a target="_blank" href="http://windsorup.com" title="WordPress Maintenance &amp; Development">Windsor Digital</a>. You can also
+				<a target="_blank" href="http://twitter.com/justinwhall" title="WordPress Design &amp; Development">Tweet Me</a>				
 			</div>
 		</form>
 	</div>
