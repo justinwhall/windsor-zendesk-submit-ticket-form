@@ -2,7 +2,7 @@
 
 Plugin Name: Windsor Zendesk Submit Ticket Form
 Plugin URI: http://windsorup.com/zendesk-submit-ticket-form-wordpress-plugin/
-Description: Delivers a clean, secure, plug-n-play ticket submission form for and Zendesk account.
+Description: Delivers a clean, secure, plug-n-play ticket submission form for a Zendesk account.
 Tags: contact, form, email, mail, captcha, support form
 Author: Justin W Hall
 Author URI: http://justinwhall.com/
