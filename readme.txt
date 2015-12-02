@@ -1,6 +1,6 @@
 === Simple Basic Contact Form ===
 
-Plugin Name: Zendesk Submit Ticket Form
+Plugin Name: Windsor Zendesk Submit Ticket Form
 Plugin URI: http://windsorup.com/zendesk-submit-ticket-form-wordpress-plugin/
 Description: Delivers a clean, secure, plug-n-play ticket submission form for and Zendesk account.
 Tags: contact, form, email, mail, captcha, support form
@@ -15,11 +15,11 @@ Text Domain: zdf
 Domain Path: /languages/
 License: GPL v2 or later
 
-Zendesk Submit Ticket Form is a clean, secure, plug-n-play ticket submission form for and Zendesk account.
+Windsor Zendesk Submit Ticket Form is a clean, secure, plug-n-play ticket submission form for and Zendesk account.
 
 == Description ==
 
-[Zendesk Submit Ticket Form](http://windsorup.com/zendesk-submit-ticket-form-wordpress-plugin/) is a clean, secure, plug-n-play ticket submission form for and Zendesk account.
+[Windsor Zendesk Submit Ticket Form](http://windsorup.com/zendesk-submit-ticket-form-wordpress-plugin/) is a clean, secure, plug-n-play ticket submission form for and Zendesk account.
 
 **Overview**
 
